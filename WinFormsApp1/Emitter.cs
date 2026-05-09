@@ -30,18 +30,29 @@ namespace WinFormsApp1
         public Color ColorFrom = Color.White; // начальный цвет частицы
         public Color ColorTo = Color.FromArgb(0, Color.Black); // конечный цвет частиц
 
+        public int ParticlesPerTick = 1;
+
         public void UpdateState()
         {
+            var particlesToCreate = ParticlesPerTick;
             foreach (var particle in particles)
             {
                 particle.Life--;
 
                 if (particle.Life <= 0)
                 {
-                    ResetParticle(particle);
+                    if (particlesToCreate > 0)
+                    {
+                        particlesToCreate -= 1;
+                        ResetParticle(particle);
+                    }
+                    
                 }
                 else
                 {
+                    particle.X += particle.SpeedX;
+                    particle.Y += particle.SpeedY;
+
                     foreach (var point in impactPoints)
                     {
                         point.ImpactParticle(particle);
@@ -49,27 +60,15 @@ namespace WinFormsApp1
 
                     particle.SpeedX += GravitationX;
                     particle.SpeedY += GravitationY;
-
-                    particle.X += particle.SpeedX;
-                    particle.Y += particle.SpeedY;
                 }
             }
 
-            for (var i = 0; i < 10; ++i)
+            while (particlesToCreate > 0)
             {
-                if (particles.Count < ParticlesCount)
-                {
-                    var particle = new ParticleColorful();
-                    particle.FromColor = Color.Red;
-                    particle.ToColor = Color.FromArgb(0, Color.White);
-                    ResetParticle(particle);
-
-                    particles.Add(particle);
-                }
-                else
-                {
-                    break;
-                }
+                particlesToCreate -= 1;
+                var particle = CreateParticle();
+                ResetParticle(particle);
+                particles.Add(particle);
             }
         }
 
@@ -88,17 +87,30 @@ namespace WinFormsApp1
 
         public virtual void ResetParticle(Particle particle)
         {
-            particle.Life = 20 + Particle.rand.Next(LifeMin, LifeMax);
+            particle.Life = Particle.rand.Next(LifeMin, LifeMax);
+
             particle.X = X;
             particle.Y = Y;
 
-            var direction = Direction + (double)Particle.rand.Next(Spreading) - Spreading / 2;
-            var speed = 1 + Particle.rand.Next(SpeedMin, SpeedMax);
+            var direction = Direction
+                + (double)Particle.rand.Next(Spreading)
+                - Spreading / 2;
+
+            var speed = Particle.rand.Next(SpeedMin, SpeedMax);
 
             particle.SpeedX = (float)(Math.Cos(direction / 180 * Math.PI) * speed);
             particle.SpeedY = -(float)(Math.Sin(direction / 180 * Math.PI) * speed);
 
-            particle.Radius = 2 + Particle.rand.Next(10);
+            particle.Radius = Particle.rand.Next(RadiusMin, RadiusMax);
+        }
+
+        public virtual Particle CreateParticle()
+        {
+            var particle = new ParticleColorful();
+            particle.FromColor = ColorFrom;
+            particle.ToColor = ColorTo;
+
+            return particle;
         }
     }
 }

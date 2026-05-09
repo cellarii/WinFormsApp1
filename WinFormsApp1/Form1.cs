@@ -5,10 +5,14 @@ namespace WinFormsApp1
     public partial class Form1 : Form
     {
         List<Emitter> emitters = new List<Emitter>();
-        Emitter emitter;
+        //Emitter emitter;
         //GravityPoint point1;
         //GravityPoint point2;
-        ReboundPoint point;
+        //ReboundPoint point;
+        TopEmitter emitter;
+        List<ChangeColorPoint> colorPoints = new List<ChangeColorPoint>();
+
+        Color[] colors = new Color[]{Color.Red, Color.Orange, Color.Yellow, Color.Green, Color.Blue, Color.Indigo, Color.Violet};
 
         public Form1()
         {
@@ -16,42 +20,66 @@ namespace WinFormsApp1
 
             picDisplay.Image = new Bitmap(picDisplay.Width, picDisplay.Height);
 
-            this.emitter = new Emitter
+            this.emitter = new TopEmitter
             {
-                Direction = -45,
-                Spreading = 10,
-                SpeedMin = 10,
-                SpeedMax = 10,
-                ColorFrom = Color.Gold,
-                ColorTo = Color.FromArgb(0, Color.Red),
+                Width = picDisplay.Width,
+                Direction = 270,
+                Spreading = 30,
+                SpeedMin = 1,
+                SpeedMax = 3,
+                ColorFrom = Color.White,
+                ColorTo = Color.FromArgb(0, Color.White),
                 ParticlesPerTick = 10,
-                X = 40,
-                Y = 40,
+                X = picDisplay.Width / 2,
+                Y = 0,
+                GravitationY = 0.2f
             };
 
             emitters.Add(this.emitter);
 
-            point = new ReboundPoint
-            {
-                X = picDisplay.Width / 2 + 100,
-                Y = picDisplay.Height / 2 + 100,
-                Radius = 30
-            };
+            //point = new ReboundPoint
+            //{
+            //    X = picDisplay.Width / 2 + 100,
+            //    Y = picDisplay.Height / 2 + 100,
+            //    Radius = 30
+            //};
 
-            emitter.impactPoints.Add(new ReboundPoint
-            {
-                X = 280,
-                Y = 280,
-                Radius = 40
-            });
+            //emitter.impactPoints.Add(new ReboundPoint
+            //{
+            //    X = 280,
+            //    Y = 280,
+            //    Radius = 40
+            //});
 
-            emitter.impactPoints.Add(new ReboundPoint
+            //emitter.impactPoints.Add(new ReboundPoint
+            //{
+            //    X = 300,
+            //    Y = 130,
+            //    Radius = 40
+            //});
+            //emitter.impactPoints.Add(point);
+
+            CreateRainbowPoints();
+        }
+
+        private void CreateRainbowPoints()
+        {
+            int space = 100;
+            int y = picDisplay.Height/2-100;
+
+            for (int i = 0; i < colors.Length; i++)
             {
-                X = 300,
-                Y = 130,
-                Radius = 40
-            });
-            emitter.impactPoints.Add(point);
+                var point = new ChangeColorPoint
+                {
+                    X = space*(i+1),
+                    Y = y,
+                    Radius=46,
+                    NewColor=colors[i]
+                };
+
+                colorPoints.Add(point);
+                emitter.impactPoints.Add(point);
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -75,8 +103,8 @@ namespace WinFormsApp1
             emitter.MousePositionX = e.X;
             emitter.MousePositionY = e.Y;
 
-            point.X = e.X;
-            point.Y = e.Y;
+            //point.X = e.X;
+            //point.Y = e.Y;
         }
 
         //private void tbDirection_Scroll(object sender, EventArgs e)

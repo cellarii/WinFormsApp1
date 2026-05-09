@@ -102,6 +102,12 @@ namespace WinFormsApp1
             particle.SpeedY = -(float)(Math.Sin(direction / 180 * Math.PI) * speed);
 
             particle.Radius = Particle.rand.Next(RadiusMin, RadiusMax);
+
+            if (particle is ParticleColorful colorful)
+            {
+                colorful.FromColor = ColorFrom;
+                colorful.ToColor = ColorTo;
+            }
         }
 
         public virtual Particle CreateParticle()

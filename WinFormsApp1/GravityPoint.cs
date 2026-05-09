@@ -29,19 +29,6 @@ namespace WinFormsApp1
                    Power,
                    Power
                );
-
-            var stringFormat = new StringFormat(); // создаем экземпляр класса
-            stringFormat.Alignment = StringAlignment.Center; // выравнивание по горизонтали
-            stringFormat.LineAlignment = StringAlignment.Center; // выравнивание по вертикали
-
-            g.DrawString(
-                $"Я гравитон\nc силой {Power}",
-                new Font("Verdana", 10),
-                new SolidBrush(Color.White),
-                X,
-                Y,
-                stringFormat // передаем инфу о выравнивании
-            );
         }
     }
 }

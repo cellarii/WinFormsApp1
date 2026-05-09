@@ -6,8 +6,9 @@ namespace WinFormsApp1
     {
         List<Emitter> emitters = new List<Emitter>();
         Emitter emitter;
-        GravityPoint point1;
-        GravityPoint point2;
+        //GravityPoint point1;
+        //GravityPoint point2;
+        ReboundPoint point;
 
         public Form1()
         {
@@ -17,32 +18,40 @@ namespace WinFormsApp1
 
             this.emitter = new Emitter
             {
-                Direction = 0,
+                Direction = -45,
                 Spreading = 10,
                 SpeedMin = 10,
                 SpeedMax = 10,
                 ColorFrom = Color.Gold,
                 ColorTo = Color.FromArgb(0, Color.Red),
                 ParticlesPerTick = 10,
-                X = picDisplay.Width / 2,
-                Y = picDisplay.Height / 2,
+                X = 40,
+                Y = 40,
             };
 
             emitters.Add(this.emitter);
 
-            point1 = new GravityPoint
+            point = new ReboundPoint
             {
                 X = picDisplay.Width / 2 + 100,
-                Y = picDisplay.Height / 2,
-            };
-            point2 = new GravityPoint
-            {
-                X = picDisplay.Width / 2 - 100,
-                Y = picDisplay.Height / 2,
+                Y = picDisplay.Height / 2 + 100,
+                Radius = 30
             };
 
-            emitter.impactPoints.Add(point1);
-            emitter.impactPoints.Add(point2);
+            emitter.impactPoints.Add(new ReboundPoint
+            {
+                X = 280,
+                Y = 280,
+                Radius = 40
+            });
+
+            emitter.impactPoints.Add(new ReboundPoint
+            {
+                X = 300,
+                Y = 130,
+                Radius = 40
+            });
+            emitter.impactPoints.Add(point);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -66,24 +75,24 @@ namespace WinFormsApp1
             emitter.MousePositionX = e.X;
             emitter.MousePositionY = e.Y;
 
-            point2.X = e.X;
-            point2.Y = e.Y;
+            point.X = e.X;
+            point.Y = e.Y;
         }
 
-        private void tbDirection_Scroll(object sender, EventArgs e)
-        {
-            emitter.Direction = tbDirection.Value;
-            lblDirection.Text = $"{tbDirection.Value}°";
-        }
+        //private void tbDirection_Scroll(object sender, EventArgs e)
+        //{
+        //    emitter.Direction = tbDirection.Value;
+        //    lblDirection.Text = $"{tbDirection.Value}°";
+        //}
 
-        private void tbGraviton_Scroll(object sender, EventArgs e)
-        {
-            point1.Power = tbGraviton.Value;
-        }
+        //private void tbGraviton_Scroll(object sender, EventArgs e)
+        //{
+        //    point1.Power = tbGraviton.Value;
+        //}
 
-        private void tbGraviton2_Scroll(object sender, EventArgs e)
-        {
-            point2.Power = tbGraviton2.Value;
-        }
+        //private void tbGraviton2_Scroll(object sender, EventArgs e)
+        //{
+        //    point2.Power = tbGraviton2.Value;
+        //}
     }
 }

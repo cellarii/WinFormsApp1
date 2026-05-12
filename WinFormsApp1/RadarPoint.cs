@@ -40,9 +40,6 @@ namespace WinFormsApp1
             var pen = new Pen(HighlightColor, 2);
             g.DrawEllipse(pen, X - Radius, Y - Radius, Radius * 2, Radius * 2);
 
-            var brush = new SolidBrush(Color.FromArgb(30, HighlightColor));
-            g.FillEllipse(brush, X - Radius, Y - Radius, Radius * 2, Radius * 2);
-
             var stringFormat = new StringFormat();
             stringFormat.Alignment = StringAlignment.Center;
             stringFormat.LineAlignment = StringAlignment.Center;
@@ -79,5 +76,7 @@ namespace WinFormsApp1
                 }
             }
         }
+
+        
     }
 }

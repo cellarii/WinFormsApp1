@@ -5,13 +5,8 @@ namespace WinFormsApp1
     public partial class Form1 : Form
     {
         List<Emitter> emitters = new List<Emitter>();
-        //Emitter emitter;
-        //GravityPoint point1;
-        //GravityPoint point2;
-        //ReboundPoint point;
         RadarPoint radarPoint;
         TopEmitter emitter;
-        List<ChangeColorPoint> colorPoints = new List<ChangeColorPoint>();
 
         Color[] colors = new Color[]{Color.Red, Color.Orange, Color.Yellow, Color.Green, Color.Blue, Color.Indigo, Color.Violet};
 
@@ -48,50 +43,9 @@ namespace WinFormsApp1
 
             emitter.impactPoints.Add(radarPoint);
 
-            //point = new ReboundPoint
-            //{
-            //    X = picDisplay.Width / 2 + 100,
-            //    Y = picDisplay.Height / 2 + 100,
-            //    Radius = 30
-            //};
+            picDisplay.MouseWheel += picDisplay_MouseWheel;
 
-            //emitter.impactPoints.Add(new ReboundPoint
-            //{
-            //    X = 280,
-            //    Y = 280,
-            //    Radius = 40
-            //});
-
-            //emitter.impactPoints.Add(new ReboundPoint
-            //{
-            //    X = 300,
-            //    Y = 130,
-            //    Radius = 40
-            //});
-            //emitter.impactPoints.Add(point);
-
-            //CreateRainbowPoints();
         }
-
-        //private void CreateRainbowPoints()
-        //{
-        //    int space = 100;
-        //    int y = picDisplay.Height/2-100;
-
-        //    for (int i = 0; i < colors.Length; i++)
-        //    {
-        //        var point = new ChangeColorPoint
-        //        {
-        //            X = space*(i+1),
-        //            Y = y,
-        //            Radius=46,
-        //            NewColor=colors[i]
-        //        };
-
-        //        colorPoints.Add(point);
-        //        emitter.impactPoints.Add(point);
-        //    }
-        //}
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -106,35 +60,21 @@ namespace WinFormsApp1
             picDisplay.Invalidate();
         }
 
-        private int MousePositionX;
-        private int MousePositionY;
-
         private void picDisplay_MouseMove(object sender, MouseEventArgs e)
         {
             radarPoint.X = e.X;
             radarPoint.Y = e.Y;
-
-            //emitter.MousePositionX = e.X;
-            //emitter.MousePositionY = e.Y;
-
-            //point.X = e.X;
-            //point.Y = e.Y;
         }
 
-        //private void tbDirection_Scroll(object sender, EventArgs e)
-        //{
-        //    emitter.Direction = tbDirection.Value;
-        //    lblDirection.Text = $"{tbDirection.Value}°";
-        //}
+        private void picDisplay_MouseWheel(object sender, MouseEventArgs e)
+        {
+            radarPoint.Radius += e.Delta > 0 ? 5 : -5;
 
-        //private void tbGraviton_Scroll(object sender, EventArgs e)
-        //{
-        //    point1.Power = tbGraviton.Value;
-        //}
+            if (radarPoint.Radius < 20) radarPoint.Radius = 20;
+            if (radarPoint.Radius > 150) radarPoint.Radius = 150;
 
-        //private void tbGraviton2_Scroll(object sender, EventArgs e)
-        //{
-        //    point2.Power = tbGraviton2.Value;
-        //}
+            this.Text = $"Радар: {radarPoint.Radius}px";
+        }
+
     }
 }

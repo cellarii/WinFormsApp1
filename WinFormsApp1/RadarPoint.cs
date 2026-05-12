@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,8 +30,8 @@ namespace WinFormsApp1
                 }
                 else
                 {
-                    colorful.FromColor = Color.White;
-                    colorful.ToColor = Color.FromArgb(0, Color.White);
+                    colorful.FromColor = Color.Gold;
+                    colorful.ToColor = Color.FromArgb(0, Color.Red);
                 }
             }
         }
@@ -44,20 +45,14 @@ namespace WinFormsApp1
             stringFormat.Alignment = StringAlignment.Center;
             stringFormat.LineAlignment = StringAlignment.Center;
 
-            var font = new Font("Verdana", 12);
-            var textBrush = new SolidBrush(HighlightColor);
-
             g.DrawString(
                 $"{ParticlesCount}",
-                font,
-                textBrush,
+                new Font("Verdana", 10),
+                new SolidBrush(Color.White),
                 X,
                 Y,
                 stringFormat
             );
-
-            font.Dispose();
-            textBrush.Dispose();
         }
 
         public void CountParticles(List<Particle> particles)

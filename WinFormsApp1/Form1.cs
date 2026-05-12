@@ -6,9 +6,7 @@ namespace WinFormsApp1
     {
         List<Emitter> emitters = new List<Emitter>();
         RadarPoint radarPoint;
-        TopEmitter emitter;
-
-        Color[] colors = new Color[]{Color.Red, Color.Orange, Color.Yellow, Color.Green, Color.Blue, Color.Indigo, Color.Violet};
+        Emitter emitter;
 
         public Form1()
         {
@@ -16,26 +14,39 @@ namespace WinFormsApp1
 
             picDisplay.Image = new Bitmap(picDisplay.Width, picDisplay.Height);
 
-            this.emitter = new TopEmitter
+            //this.emitter = new TopEmitter
+            //{
+            //    Width = picDisplay.Width,
+            //    Direction = 270,
+            //    Spreading = 30,
+            //    SpeedMin = 1,
+            //    SpeedMax = 3,
+            //    ColorFrom = Color.White,
+            //    ColorTo = Color.FromArgb(0, Color.White),
+            //    ParticlesPerTick = 30,
+            //    X = picDisplay.Width / 2,
+            //    Y = 0,
+            //    GravitationY = 0.35f
+            //};
+
+            this.emitter = new Emitter
             {
-                Width = picDisplay.Width,
-                Direction = 270,
-                Spreading = 30,
-                SpeedMin = 1,
-                SpeedMax = 3,
-                ColorFrom = Color.White,
-                ColorTo = Color.FromArgb(0, Color.White),
-                ParticlesPerTick = 30,
+                Direction = 90,
+                Spreading = 200,
+                SpeedMin = 5,
+                SpeedMax = 10,
+                ColorFrom = Color.Gold,
+                ColorTo = Color.FromArgb(0, Color.Red),
+                ParticlesPerTick = 40,
                 X = picDisplay.Width / 2,
-                Y = 0,
-                GravitationY = 0.35f
+                Y = picDisplay.Height / 2,
+                GravitationY = 0.2f,
+                GravitationX = 0
             };
 
-            emitters.Add(this.emitter);
-
-            radarPoint=new RadarPoint
+            radarPoint =new RadarPoint
             {
-                X = picDisplay.Width / 2,
+                X = picDisplay.Width / 2-60,
                 Y = picDisplay.Height / 2,
                 Radius = 50,
                 HighlightColor = Color.Lime

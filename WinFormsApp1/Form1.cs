@@ -9,6 +9,7 @@ namespace WinFormsApp1
         //GravityPoint point1;
         //GravityPoint point2;
         //ReboundPoint point;
+        RadarPoint radarPoint;
         TopEmitter emitter;
         List<ChangeColorPoint> colorPoints = new List<ChangeColorPoint>();
 
@@ -29,13 +30,23 @@ namespace WinFormsApp1
                 SpeedMax = 3,
                 ColorFrom = Color.White,
                 ColorTo = Color.FromArgb(0, Color.White),
-                ParticlesPerTick = 10,
+                ParticlesPerTick = 30,
                 X = picDisplay.Width / 2,
                 Y = 0,
-                GravitationY = 0.2f
+                GravitationY = 0.35f
             };
 
             emitters.Add(this.emitter);
+
+            radarPoint=new RadarPoint
+            {
+                X = picDisplay.Width / 2,
+                Y = picDisplay.Height / 2,
+                Radius = 50,
+                HighlightColor = Color.Lime
+            };
+
+            emitter.impactPoints.Add(radarPoint);
 
             //point = new ReboundPoint
             //{
@@ -59,28 +70,28 @@ namespace WinFormsApp1
             //});
             //emitter.impactPoints.Add(point);
 
-            CreateRainbowPoints();
+            //CreateRainbowPoints();
         }
 
-        private void CreateRainbowPoints()
-        {
-            int space = 100;
-            int y = picDisplay.Height/2-100;
+        //private void CreateRainbowPoints()
+        //{
+        //    int space = 100;
+        //    int y = picDisplay.Height/2-100;
 
-            for (int i = 0; i < colors.Length; i++)
-            {
-                var point = new ChangeColorPoint
-                {
-                    X = space*(i+1),
-                    Y = y,
-                    Radius=46,
-                    NewColor=colors[i]
-                };
+        //    for (int i = 0; i < colors.Length; i++)
+        //    {
+        //        var point = new ChangeColorPoint
+        //        {
+        //            X = space*(i+1),
+        //            Y = y,
+        //            Radius=46,
+        //            NewColor=colors[i]
+        //        };
 
-                colorPoints.Add(point);
-                emitter.impactPoints.Add(point);
-            }
-        }
+        //        colorPoints.Add(point);
+        //        emitter.impactPoints.Add(point);
+        //    }
+        //}
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -100,8 +111,11 @@ namespace WinFormsApp1
 
         private void picDisplay_MouseMove(object sender, MouseEventArgs e)
         {
-            emitter.MousePositionX = e.X;
-            emitter.MousePositionY = e.Y;
+            radarPoint.X = e.X;
+            radarPoint.Y = e.Y;
+
+            //emitter.MousePositionX = e.X;
+            //emitter.MousePositionY = e.Y;
 
             //point.X = e.X;
             //point.Y = e.Y;

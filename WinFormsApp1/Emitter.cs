@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WinFormsApp1
 {
@@ -60,6 +61,14 @@ namespace WinFormsApp1
 
                     particle.SpeedX += GravitationX;
                     particle.SpeedY += GravitationY;
+                }
+            }
+
+            foreach (var point in impactPoints)
+            {
+                if (point is RadarPoint radar)
+                {
+                    radar.CountParticles(particles);
                 }
             }
 

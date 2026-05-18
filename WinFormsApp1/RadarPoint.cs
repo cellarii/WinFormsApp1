@@ -23,7 +23,6 @@ public class RadarPoint : IImpactPoint
                     colorful.DefaultFromColor = colorful.FromColor;
                     colorful.DefaultToColor = colorful.ToColor;
                 }
-
                 colorful.FromColor = HighlightColor;
                 colorful.ToColor = Color.FromArgb(0, HighlightColor);
             }
@@ -33,6 +32,9 @@ public class RadarPoint : IImpactPoint
                 {
                     colorful.FromColor = colorful.DefaultFromColor;
                     colorful.ToColor = colorful.DefaultToColor;
+
+                    colorful.DefaultFromColor = default(Color);
+                    colorful.DefaultToColor = default(Color);
                 }
             }
         }
@@ -73,5 +75,4 @@ public class RadarPoint : IImpactPoint
             }
         }
     }
-
 }

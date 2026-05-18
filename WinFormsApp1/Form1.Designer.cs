@@ -32,15 +32,17 @@
             picDisplay = new PictureBox();
             timer1 = new System.Windows.Forms.Timer(components);
             lblDirection = new Label();
+            tbChangePlace = new TrackBar();
             ((System.ComponentModel.ISupportInitialize)picDisplay).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tbChangePlace).BeginInit();
             SuspendLayout();
             // 
             // picDisplay
             // 
             picDisplay.Location = new Point(10, 10);
-            picDisplay.Margin = new Padding(2, 2, 2, 2);
+            picDisplay.Margin = new Padding(2);
             picDisplay.Name = "picDisplay";
-            picDisplay.Size = new Size(1361, 489);
+            picDisplay.Size = new Size(1361, 476);
             picDisplay.TabIndex = 0;
             picDisplay.TabStop = false;
             picDisplay.MouseMove += picDisplay_MouseMove;
@@ -60,17 +62,30 @@
             lblDirection.Size = new Size(0, 20);
             lblDirection.TabIndex = 2;
             // 
+            // tbChangePlace
+            // 
+            tbChangePlace.Location = new Point(519, 500);
+            tbChangePlace.Maximum = 185;
+            tbChangePlace.Minimum = 100;
+            tbChangePlace.Name = "tbChangePlace";
+            tbChangePlace.Size = new Size(376, 56);
+            tbChangePlace.TabIndex = 3;
+            tbChangePlace.Value = 100;
+            tbChangePlace.Scroll += tbChangePlace_Scroll;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1382, 510);
+            ClientSize = new Size(1382, 577);
+            Controls.Add(tbChangePlace);
             Controls.Add(lblDirection);
             Controls.Add(picDisplay);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "Form1";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)picDisplay).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tbChangePlace).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -80,5 +95,6 @@
         private PictureBox picDisplay;
         private System.Windows.Forms.Timer timer1;
         private Label lblDirection;
+        private TrackBar tbChangePlace;
     }
 }

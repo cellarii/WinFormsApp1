@@ -34,7 +34,7 @@ namespace WinFormsApp1
         public override void Render(Graphics g)
         {
             g.DrawEllipse(
-                new Pen(Color.Cyan, 2),
+                new Pen(Color.Red, 2),
                 X - Radius,
                 Y - Radius,
                 Radius * 2,

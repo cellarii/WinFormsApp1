@@ -8,7 +8,7 @@ namespace WinFormsApp1
 {
     public class ChangeColorPoint : IImpactPoint
     {
-        public int Radius = 30;
+        public int Radius;
         public Color NewColor;
 
         public override void ImpactParticle(Particle particle)
@@ -17,7 +17,7 @@ namespace WinFormsApp1
             float gY = Y - particle.Y;
             double r = Math.Sqrt(gX * gX + gY * gY);
 
-            if (r + particle.Radius < Radius)
+            if (r < Radius) // + particle.Radius
             {
                 if (particle is ParticleColorful colorful)
                 {
@@ -30,12 +30,8 @@ namespace WinFormsApp1
         public override void Render(Graphics g)
         {
             var pen = new Pen(NewColor, 2);
-            g.DrawEllipse(pen, X-Radius, Y-Radius, Radius*2, Radius*2);
+            g.DrawEllipse(pen, X - Radius, Y - Radius, Radius * 2, Radius * 2);
             pen.Dispose();
-
-            var brush = new SolidBrush(Color.FromArgb(50, NewColor));
-            g.FillEllipse(brush, X-Radius,  -Radius, Radius*2, Radius*2);
-            brush.Dispose();
         }
     }
 }

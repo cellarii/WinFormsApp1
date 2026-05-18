@@ -37,9 +37,10 @@
             // 
             // picDisplay
             // 
-            picDisplay.Location = new Point(12, 12);
+            picDisplay.Location = new Point(10, 10);
+            picDisplay.Margin = new Padding(2, 2, 2, 2);
             picDisplay.Name = "picDisplay";
-            picDisplay.Size = new Size(834, 378);
+            picDisplay.Size = new Size(1361, 489);
             picDisplay.TabIndex = 0;
             picDisplay.TabStop = false;
             picDisplay.MouseMove += picDisplay_MouseMove;
@@ -53,18 +54,20 @@
             // lblDirection
             // 
             lblDirection.AutoSize = true;
-            lblDirection.Location = new Point(197, 422);
+            lblDirection.Location = new Point(158, 338);
+            lblDirection.Margin = new Padding(2, 0, 2, 0);
             lblDirection.Name = "lblDirection";
-            lblDirection.Size = new Size(0, 25);
+            lblDirection.Size = new Size(0, 20);
             lblDirection.TabIndex = 2;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(859, 414);
+            ClientSize = new Size(1382, 510);
             Controls.Add(lblDirection);
             Controls.Add(picDisplay);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "Form1";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)picDisplay).EndInit();

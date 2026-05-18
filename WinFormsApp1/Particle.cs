@@ -45,6 +45,8 @@ namespace WinFormsApp1
     {
         public Color FromColor;
         public Color ToColor;
+        public Color DefaultFromColor;
+        public Color DefaultToColor;
 
         public static Color MixColor(Color color1, Color color2, float k)
         {

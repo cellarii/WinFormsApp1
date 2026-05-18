@@ -19,6 +19,12 @@ namespace WinFormsApp1
 
             particle.SpeedY = 1;
             particle.SpeedX = Particle.rand.Next(-2, 2);
+
+            if (particle is ParticleColorful colorful)
+            {
+                colorful.DefaultFromColor = default(Color);
+                colorful.DefaultToColor = default(Color);
+            }
         }
     }
 }
